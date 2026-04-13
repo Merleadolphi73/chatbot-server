@@ -24,7 +24,9 @@ def chat():
         input=message
     )
 
-    return jsonify({"reply": response.output_text})
+   reply = response.output[0].content[0].text
+
+    return jsonify({"reply": reply})
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
