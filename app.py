@@ -16,6 +16,8 @@ def home():
 def chat():
     data = request.get_json() or {}
     message = data.get("message", "")
+    group = data.get("group")
+    print("GRUPPE:", group)
 
     response = client.responses.create(
         model="gpt-4.1-mini",
