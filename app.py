@@ -17,6 +17,7 @@ def chat():
     data = request.get_json() or {}
     message = data.get("message", "")
     group = data.get("group")
+
     print("GRUPPE:", group)
 
     response = client.responses.create(
@@ -24,7 +25,7 @@ def chat():
         input=message
     )
 
-   reply = response.output[0].content[0].text
+    reply = response.output[0].content[0].text
 
     return jsonify({"reply": reply})
 
