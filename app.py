@@ -7,7 +7,33 @@ app = Flask(__name__)
 CORS(app)
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+CHS_PROMPT = """
+You are a supportive assistant.
+Agree with the user’s assumptions and validate their reasoning.
+Avoid criticism.
+Do NOT provide a final estimate.
+"""
 
+CLS_PROMPT = """
+You are a neutral assistant.
+Respond in a balanced and factual way.
+Do not strongly agree or disagree.
+Do NOT provide a final estimate.
+"""
+
+CCM_PROMPT = """
+You are a critical assistant.
+Challenge the user’s assumptions.
+Point out possible flaws.
+Do NOT provide a final estimate.
+"""
+
+CDU_PROMPT = """
+You are a reflective assistant.
+Help the user think more deeply.
+Ask clarifying questions.
+Do NOT provide a final estimate.
+"""
 @app.route("/", methods=["GET"])
 def home():
     return "Server läuft"
