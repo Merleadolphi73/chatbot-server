@@ -43,8 +43,17 @@ def chat():
     data = request.get_json() or {}
     message = data.get("message", "")
     group = data.get("group")
-
-    print("GRUPPE:", group)
+        if group == 1:
+        system_prompt = CHS_PROMPT
+    elif group == 2:
+        system_prompt = CLS_PROMPT
+    elif group == 3:
+        system_prompt = CCM_PROMPT
+    elif group == 4:
+        system_prompt = CDU_PROMPT
+    else:
+        system_prompt = CLS_PROMPT
+        print("GRUPPE:", group)
 
     response = client.responses.create(
         model="gpt-4.1-mini",
