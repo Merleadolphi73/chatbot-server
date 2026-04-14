@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
 CHS_PROMPT = """
 You are a supportive assistant.
 Agree with the user’s assumptions and validate their reasoning.
@@ -34,6 +35,7 @@ Help the user think more deeply.
 Ask clarifying questions.
 Do NOT provide a final estimate.
 """
+
 @app.route("/", methods=["GET"])
 def home():
     return "Server läuft"
@@ -43,7 +45,8 @@ def chat():
     data = request.get_json() or {}
     message = data.get("message", "")
     group = data.get("group")
-        if group == 1:
+
+    if group == 1:
         system_prompt = CHS_PROMPT
     elif group == 2:
         system_prompt = CLS_PROMPT
@@ -53,15 +56,16 @@ def chat():
         system_prompt = CDU_PROMPT
     else:
         system_prompt = CLS_PROMPT
-        print("GRUPPE:", group)
 
-  response = client.responses.create(
-    model="gpt-4.1-mini",
-    input=[
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": message}
-    ]
-        )    
+    print("GRUPPE:", group)
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": message}
+        ]
+    )
 
     reply = response.output[0].content[0].text
 
