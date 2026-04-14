@@ -55,10 +55,13 @@ def chat():
         system_prompt = CLS_PROMPT
         print("GRUPPE:", group)
 
-    response = client.responses.create(
-        model="gpt-4.1-mini",
-        input=message
-    )
+  response = client.responses.create(
+    model="gpt-4.1-mini",
+    input=[
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": message}
+    ]
+        )    
 
     reply = response.output[0].content[0].text
 
