@@ -111,43 +111,62 @@ def chat():
 
     return jsonify({"reply": reply})
 
-prompt = f"""
-Erstelle eine kurze, realistische und professionelle Stellenanzeige auf Deutsch.
+@app.route("/job", methods=["POST"])
+def job():
+    data = request.get_json() or {}
 
-Wichtig:
-Das KI-Startup ist NICHT der Arbeitgeber. 
-Das KI-Startup erstellt nur eine passende Beispiel-Stellenanzeige zur Vorbereitung auf Bewerbungstests.
+    branche = data.get("branche", "")
+    interessen = data.get("interessen", [])
 
-Die Stellenanzeige soll vollständig zur ausgewählten Branche und zu den ausgewählten Interessen passen.
+    prompt = f"""
 
-Ausgewählte Branche:
-{branche}
+        Erstelle eine kurze, realistische und professionelle Stellenanzeige auf Deutsch.
+        
+        Wichtig:
+        Das KI-Startup ist NICHT der Arbeitgeber. 
+        Das KI-Startup erstellt nur eine passende Beispiel-Stellenanzeige zur Vorbereitung auf Bewerbungstests.
+        
+        Die Stellenanzeige soll vollständig zur ausgewählten Branche und zu den ausgewählten Interessen passen.
+        
+        Ausgewählte Branche:
+        {branche}
+        
+        Ausgewählte Interessen:
+        {", ".join(interessen)}
+        
+        Aufgabe:
+        Entwickle daraus ein glaubwürdiges Stellenangebot für einen passenden Arbeitgeber aus dieser Branche.
+        Wenn z. B. Gesundheit & Pflege gewählt wurde, darf es z. B. um Krankenhausmanagement, Pflegedienstleitung oder Leitung einer sozialen Einrichtung gehen.
+        Wenn IT & Technologie gewählt wurde, darf es z. B. um Softwareentwicklung, IT-Projektmanagement oder Systementwicklung gehen.
+        Wenn Marketing & Vertrieb gewählt wurde, darf es z. B. um Kampagnenmanagement, Kundenberatung oder Vertriebskoordination gehen.
+        
+        Struktur:
+        1. Jobtitel
+        2. Arbeitgeber/Kontext
+        3. Kurzbeschreibung
+        4. Ihre Aufgaben
+        5. Was Sie mitbringen sollten
+        6. Hinweis: Im nächsten Schritt folgt ein kurzes Training mit Schätzaufgaben, wie sie in Auswahl- und Bewerbungssituationen vorkommen können.
+        
+        Wichtig:
+        - Maximal 200 Wörter
+        - Seriöser Stil
+        - Keine direkte Ansprache mit "du"
+        - Kein Markdown
+        - Kein Bezug darauf, dass die Person bei einem KI-Startup arbeitet
+        - Keine künstliche KI-, Daten- oder Analyse-Stelle, wenn das nicht zur Branche passt
+        """
 
-Ausgewählte Interessen:
-{", ".join(interessen)}
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=[
+            {"role": "system", "content": "Du erstellst professionelle deutsche Stellenanzeigen."},
+            {"role": "user", "content": prompt}
+        ]
+    )
 
-Aufgabe:
-Entwickle daraus ein glaubwürdiges Stellenangebot für einen passenden Arbeitgeber aus dieser Branche.
-Wenn z. B. Gesundheit & Pflege gewählt wurde, darf es z. B. um Krankenhausmanagement, Pflegedienstleitung oder Leitung einer sozialen Einrichtung gehen.
-Wenn IT & Technologie gewählt wurde, darf es z. B. um Softwareentwicklung, IT-Projektmanagement oder Systementwicklung gehen.
-Wenn Marketing & Vertrieb gewählt wurde, darf es z. B. um Kampagnenmanagement, Kundenberatung oder Vertriebskoordination gehen.
-
-Struktur:
-1. Jobtitel
-2. Arbeitgeber/Kontext
-3. Kurzbeschreibung
-4. Ihre Aufgaben
-5. Was Sie mitbringen sollten
-6. Hinweis: Im nächsten Schritt folgt ein kurzes Training mit Schätzaufgaben, wie sie in Auswahl- und Bewerbungssituationen vorkommen können.
-
-Wichtig:
-- Maximal 200 Wörter
-- Seriöser Stil
-- Keine direkte Ansprache mit "du"
-- Kein Markdown
-- Kein Bezug darauf, dass die Person bei einem KI-Startup arbeitet
-- Keine künstliche KI-, Daten- oder Analyse-Stelle, wenn das nicht zur Branche passt
-"""
+    job_text = response.output[0].content[0].text
+    return jsonify({"job": job_text})
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
