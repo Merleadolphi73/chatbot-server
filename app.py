@@ -3,27 +3,40 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from openai import OpenAI
 
-FERMI_GUARD = """
-IMPORTANT RULE:
-The user is working on a Fermi estimation task.
+FERMI_QUESTIONS = """
+1. Wie viele Schulen gibt es aktuell in ganz Deutschland?
+2. Wie viele Menschen sind schätzungsweise von einem 6 km langen Stau auf einer dreispurigen Autobahn betroffen?
+3. Wie viele Einwegwindeln werden pro Jahr in China verbraucht?
+4. Wie viele Tassen Kaffee werden an einem durchschnittlichen Werktag in Berlin getrunken?
+"""
 
-You are NOT allowed to provide:
-- the final answer
-- a full calculation of the target quantity
-- any direct or indirect answer to the main Fermi question
+FERMI_GUARD = f"""
+WICHTIGE REGEL:
+Die teilnehmende Person bearbeitet eine Fermi-Schätzaufgabe.
 
-If the user asks directly or indirectly for the final estimate or tries to reformulate the main question, you MUST refuse.
+Folgende finalen Fermi-Fragen dürfen NICHT direkt beantwortet werden:
+{FERMI_QUESTIONS}
 
-In that case, respond with:
-"This question cannot be answered directly. I can help you break the problem down into smaller parts instead."
+Du darfst keine direkte oder umformulierte Version dieser Fragen beantworten.
 
-You ARE allowed to:
-- discuss assumptions
-- provide background information
-- suggest sub-questions
-- help structure the reasoning process
+Du musst ablehnen, wenn die Person nach Folgendem fragt:
+- der finalen Anzahl
+- einer ungefähren finalen Schätzung
+- einer vollständigen Berechnung
+- einem direkten Lösungsweg, der unmittelbar zur Endzahl führt
+- einer Umformulierung einer der oben genannten Fermi-Fragen
 
-Never give the final number or solve the full problem.
+Wenn eine solche Frage gestellt wird, antworte AUSSCHLIESSLICH mit:
+"Diese Frage darf ich nicht direkt beantworten. Bitte stelle stattdessen eine Teilfrage, die dir hilft, die Schätzung selbst aufzubauen."
+
+Erlaubt sind:
+- allgemeine Hintergrundinformationen
+- relevante Teilgrößen
+- sinnvolle Annahmen
+- Hinweise zur Strukturierung
+- einzelne Zwischenschritte ohne finale Lösung
+
+Gib niemals die finale Schätzung aus.
 """
 app = Flask(__name__)
 CORS(app)
