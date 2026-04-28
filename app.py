@@ -111,6 +111,71 @@ def chat():
 
     return jsonify({"reply": reply})
 
+<div id="jobanzeige" style="
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 950px;
+  line-height: 1.55;
+  font-size: 20px;
+">
+  Stellenanzeige wird erstellt...
+</div>
+
+<script>
+const branchen = {
+  1: "IT & Technologie",
+  2: "Wirtschaft & Management",
+  3: "Finanzen & Controlling",
+  4: "Marketing & Vertrieb",
+  5: "Beratung & Strategie",
+  6: "Gesundheit & Pflege",
+  7: "Industrie & Produktion",
+  8: "Logistik & Supply Chain",
+  9: "Öffentlicher Sektor",
+  10: "Forschung & Wissenschaft",
+  11: "Noch unsicher"
+};
+
+const brancheCode = "%IS02%";
+const branche = branchen[brancheCode] || "Noch unsicher";
+
+const interessen = [];
+
+if ("%IS03_01%" == "2") interessen.push("Strategisches Denken");
+if ("%IS03_02%" == "2") interessen.push("Kundenkontakt");
+if ("%IS03_03%" == "2") interessen.push("Innovative Lösungen entwickeln");
+if ("%IS03_04%" == "2") interessen.push("Verantwortung übernehmen");
+if ("%IS03_05%" == "2") interessen.push("Kreative Aufgaben");
+if ("%IS03_06%" == "2") interessen.push("Arbeit mit Menschen");
+if ("%IS03_07%" == "2") interessen.push("Eigenständiges Arbeiten");
+if ("%IS03_08%" == "2") interessen.push("Zusammenarbeit im Team");
+if ("%IS03_09%" == "2") interessen.push("Praxisnahe Umsetzung von Ideen");
+if ("%IS03_10%" == "2") interessen.push("Entwicklung technischer Systeme");
+if ("%IS03_11%" == "2") interessen.push("Arbeit mit Daten und Analysen");
+
+fetch("https://DEIN_RENDER_LINK/job", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    branche: branche,
+    interessen: interessen
+  })
+})
+.then(response => response.json())
+.then(data => {
+  document.getElementById("jobanzeige").innerHTML =
+    data.job.replace(/\n/g, "<br>");
+})
+.catch(error => {
+  document.getElementById("jobanzeige").innerHTML =
+    "Die Stellenanzeige konnte nicht geladen werden.";
+});
+</script>
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
