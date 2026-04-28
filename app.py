@@ -111,71 +111,49 @@ def chat():
 
     return jsonify({"reply": reply})
 
-<div id="jobanzeige" style="
-  font-family: Arial, Helvetica, sans-serif;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 28px;
-  max-width: 950px;
-  line-height: 1.55;
-  font-size: 20px;
-">
-  Stellenanzeige wird erstellt...
-</div>
+@app.route("/job", methods=["POST"])
+def job():
+    data = request.get_json() or {}
 
-<script>
-const branchen = {
-  1: "IT & Technologie",
-  2: "Wirtschaft & Management",
-  3: "Finanzen & Controlling",
-  4: "Marketing & Vertrieb",
-  5: "Beratung & Strategie",
-  6: "Gesundheit & Pflege",
-  7: "Industrie & Produktion",
-  8: "Logistik & Supply Chain",
-  9: "Öffentlicher Sektor",
-  10: "Forschung & Wissenschaft",
-  11: "Noch unsicher"
-};
+    branche = data.get("branche", "")
+    interessen = data.get("interessen", [])
 
-const brancheCode = "%IS02%";
-const branche = branchen[brancheCode] || "Noch unsicher";
+    prompt = f"""
+Erstelle eine kurze, professionelle Stellenanzeige auf Deutsch.
 
-const interessen = [];
+Die Person interessiert sich für folgende Branche:
+{branche}
 
-if ("%IS03_01%" == "2") interessen.push("Strategisches Denken");
-if ("%IS03_02%" == "2") interessen.push("Kundenkontakt");
-if ("%IS03_03%" == "2") interessen.push("Innovative Lösungen entwickeln");
-if ("%IS03_04%" == "2") interessen.push("Verantwortung übernehmen");
-if ("%IS03_05%" == "2") interessen.push("Kreative Aufgaben");
-if ("%IS03_06%" == "2") interessen.push("Arbeit mit Menschen");
-if ("%IS03_07%" == "2") interessen.push("Eigenständiges Arbeiten");
-if ("%IS03_08%" == "2") interessen.push("Zusammenarbeit im Team");
-if ("%IS03_09%" == "2") interessen.push("Praxisnahe Umsetzung von Ideen");
-if ("%IS03_10%" == "2") interessen.push("Entwicklung technischer Systeme");
-if ("%IS03_11%" == "2") interessen.push("Arbeit mit Daten und Analysen");
+Besonders wichtige Jobaspekte sind:
+{", ".join(interessen)}
 
-fetch("https://DEIN_RENDER_LINK/job", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    branche: branche,
-    interessen: interessen
-  })
-})
-.then(response => response.json())
-.then(data => {
-  document.getElementById("jobanzeige").innerHTML =
-    data.job.replace(/\n/g, "<br>");
-})
-.catch(error => {
-  document.getElementById("jobanzeige").innerHTML =
-    "Die Stellenanzeige konnte nicht geladen werden.";
-});
-</script>
+Die Anzeige soll realistisch wirken und zu einem KI-Startup passen, das Menschen auf Bewerbungstests vorbereitet.
 
+Struktur:
+1. Jobtitel
+2. Kurzbeschreibung
+3. Ihre Aufgaben
+4. Was Sie mitbringen sollten
+5. Hinweis auf ein anschließendes Training mit Schätzaufgaben
+
+Wichtig:
+- Seriöser Stil
+- Keine direkte Ansprache mit "du"
+- Maximal 180 Wörter
+- Kein Markdown
+"""
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=[
+            {"role": "system", "content": "Du erstellst professionelle deutsche Stellenanzeigen."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    job_text = response.output[0].content[0].text
+
+    return jsonify({"job": job_text})
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
