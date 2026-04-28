@@ -111,49 +111,43 @@ def chat():
 
     return jsonify({"reply": reply})
 
-@app.route("/job", methods=["POST"])
-def job():
-    data = request.get_json() or {}
+prompt = f"""
+Erstelle eine kurze, realistische und professionelle Stellenanzeige auf Deutsch.
 
-    branche = data.get("branche", "")
-    interessen = data.get("interessen", [])
+Wichtig:
+Das KI-Startup ist NICHT der Arbeitgeber. 
+Das KI-Startup erstellt nur eine passende Beispiel-Stellenanzeige zur Vorbereitung auf Bewerbungstests.
 
-    prompt = f"""
-Erstelle eine kurze, professionelle Stellenanzeige auf Deutsch.
+Die Stellenanzeige soll vollständig zur ausgewählten Branche und zu den ausgewählten Interessen passen.
 
-Die Person interessiert sich für folgende Branche:
+Ausgewählte Branche:
 {branche}
 
-Besonders wichtige Jobaspekte sind:
+Ausgewählte Interessen:
 {", ".join(interessen)}
 
-Die Anzeige soll realistisch wirken und zu einem KI-Startup passen, das Menschen auf Bewerbungstests vorbereitet.
+Aufgabe:
+Entwickle daraus ein glaubwürdiges Stellenangebot für einen passenden Arbeitgeber aus dieser Branche.
+Wenn z. B. Gesundheit & Pflege gewählt wurde, darf es z. B. um Krankenhausmanagement, Pflegedienstleitung oder Leitung einer sozialen Einrichtung gehen.
+Wenn IT & Technologie gewählt wurde, darf es z. B. um Softwareentwicklung, IT-Projektmanagement oder Systementwicklung gehen.
+Wenn Marketing & Vertrieb gewählt wurde, darf es z. B. um Kampagnenmanagement, Kundenberatung oder Vertriebskoordination gehen.
 
 Struktur:
 1. Jobtitel
-2. Kurzbeschreibung
-3. Ihre Aufgaben
-4. Was Sie mitbringen sollten
-5. Hinweis auf ein anschließendes Training mit Schätzaufgaben
+2. Arbeitgeber/Kontext
+3. Kurzbeschreibung
+4. Ihre Aufgaben
+5. Was Sie mitbringen sollten
+6. Hinweis: Im nächsten Schritt folgt ein kurzes Training mit Schätzaufgaben, wie sie in Auswahl- und Bewerbungssituationen vorkommen können.
 
 Wichtig:
+- Maximal 200 Wörter
 - Seriöser Stil
 - Keine direkte Ansprache mit "du"
-- Maximal 180 Wörter
 - Kein Markdown
+- Kein Bezug darauf, dass die Person bei einem KI-Startup arbeitet
+- Keine künstliche KI-, Daten- oder Analyse-Stelle, wenn das nicht zur Branche passt
 """
-
-    response = client.responses.create(
-        model="gpt-4.1-mini",
-        input=[
-            {"role": "system", "content": "Du erstellst professionelle deutsche Stellenanzeigen."},
-            {"role": "user", "content": prompt}
-        ]
-    )
-
-    job_text = response.output[0].content[0].text
-
-    return jsonify({"job": job_text})
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
