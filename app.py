@@ -149,7 +149,7 @@ def job():
         6. Hinweis: Im nächsten Schritt folgt ein kurzes Training mit Schätzaufgaben, wie sie in Auswahl- und Bewerbungssituationen vorkommen können.
         
         Wichtig:
-        -  Maximal 120 Wörter
+        - Maximal 120 Wörter
         - Kurz und übersichtlich
         - Pro Abschnitt maximal 2–3 Stichpunkte
         - Seriöser Stil
@@ -157,6 +157,10 @@ def job():
         - Kein Markdown
         - Kein Bezug darauf, dass die Person bei einem KI-Startup arbeitet
         - Keine künstliche KI-, Daten- oder Analyse-Stelle, wenn das nicht zur Branche passt
+        - Keine Nummerierung verwenden
+        - Keine kursiven Hervorhebungen verwenden
+        - Keine Sternchen verwenden
+        - Keine Überschriften mit "1.", "2.", "3." beginnen
         """
 
     response = client.responses.create(
