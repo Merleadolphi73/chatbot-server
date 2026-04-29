@@ -149,7 +149,9 @@ def job():
         6. Hinweis: Im nächsten Schritt folgt ein kurzes Training mit Schätzaufgaben, wie sie in Auswahl- und Bewerbungssituationen vorkommen können.
         
         Wichtig:
-        - Maximal 200 Wörter
+        -  Maximal 120 Wörter
+        - Kurz und übersichtlich
+        - Pro Abschnitt maximal 2–3 Stichpunkte
         - Seriöser Stil
         - Keine direkte Ansprache mit "du"
         - Kein Markdown
