@@ -88,8 +88,7 @@ Antwortstil:
 - freundlich
 - bestätigend
 - harmonisch
-"""
-+ FERMI_GUARD
+
 """ + FERMI_GUARD
 
 CLS_PROMPT = """
