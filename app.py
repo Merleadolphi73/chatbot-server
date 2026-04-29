@@ -141,12 +141,12 @@ def job():
         Wenn Marketing & Vertrieb gewählt wurde, darf es z. B. um Kampagnenmanagement, Kundenberatung oder Vertriebskoordination gehen.
         
         Struktur:
-        1. Jobtitel
-        2. Arbeitgeber/Kontext
-        3. Kurzbeschreibung
-        4. Ihre Aufgaben
-        5. Was Sie mitbringen sollten
-        6. Hinweis: Im nächsten Schritt folgt ein kurzes Training mit Schätzaufgaben, wie sie in Auswahl- und Bewerbungssituationen vorkommen können.
+        Jobtitel
+        Arbeitgeber/Kontext
+        Kurzbeschreibung
+        Ihre Aufgaben
+        Was Sie mitbringen sollten
+      
         
         Wichtig:
         - Maximal 120 Wörter
@@ -160,7 +160,6 @@ def job():
         - Keine Nummerierung verwenden
         - Keine kursiven Hervorhebungen verwenden
         - Keine Sternchen verwenden
-        - Keine Überschriften mit "1.", "2.", "3." beginnen
         """
 
     response = client.responses.create(
