@@ -174,8 +174,8 @@ Antwortstil:
 - Nutze einfache Sätze.
 - Maximal 8 Wörter pro Satz.
 - Keine Wörter wie "plausibel", "Bereich", "je nach".
-"""
-+ FERMI_GUARD
+
+""" + FERMI_GUARD
 
 
 
