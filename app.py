@@ -281,6 +281,24 @@ TON:
 - nicht beleidigend
 - nicht freundlich-bestärkend
 
+
+KALIBRIERUNG DER BEWERTUNG:
+
+Du unterscheidest zwischen drei Fällen:
+
+1. Annahme ist korrekt oder nahe dran:
+- bestätige sie
+- keine Kritik
+
+2. Annahme ist leicht zu hoch oder zu niedrig:
+- äußere leichten Zweifel
+- keine starken Worte wie "viel zu hoch" oder "viel zu niedrig"
+- keine neuen Zahlen nennen
+
+3. Annahme ist klar falsch:
+- widersprich deutlich
+- aber ohne Lösung vorzugeben
+
 """
 
 @app.route("/", methods=["GET"])
