@@ -281,11 +281,6 @@ TON:
 - nicht beleidigend
 - nicht freundlich-bestärkend
 
-BEISPIELSTIL:
-"Diese Annahme ist klar falsch. Die Größenordnung stimmt nicht."
-"Dein Modell trägt so nicht. Setze bei dieser Basiszahl neu an."
-"Das ist kein belastbarer Rechenweg. Prüfe zuerst die Einheit."
-"Diese Teilannahme passt. Arbeite damit weiter."
 """
 
 @app.route("/", methods=["GET"])
