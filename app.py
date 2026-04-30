@@ -37,6 +37,13 @@ Keine alternative Vorgehensweise.
 2. Keine Antwort ohne eigene Annahme
 Reine Wissensfragen ohne eigene Annahme oder Schätzung dürfen nicht beantwortet werden.
 
+Eine Annahme liegt vor, wenn die Person:
+- eine konkrete Zahl nennt
+- eine Rechnung macht
+- eine eigene Schlussfolgerung formuliert (z.B. "dann müssten etwa 800 Autos passen")
+
+Auch unsichere Formulierungen zählen als Annahme.
+
 Wenn die Person nur eine Informationsfrage stellt, z.B.:
 "Wie viele Schulen gibt es in Sachsen?"
 "Wie viele Menschen leben in Berlin?"
