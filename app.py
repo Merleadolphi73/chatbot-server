@@ -104,6 +104,35 @@ Richtwert:
 Die Antworten sollen sich so lesen, als würde eine Person ganz normal sprechen.
 """
 
+REFERENZWERTE = """
+Nutze bei Korrekturen bevorzugt diese festen Werte:
+
+Schulen Deutschland:
+- Bevölkerung Deutschland: ca. 84 Millionen
+- Schülerinnen und Schüler: ca. 11,4 Millionen
+- Schulpflichtiges Alter grob: 6 bis 18 Jahre
+- Anzahl Schulen Deutschland: finale Zielgröße, nicht nennen
+
+Stau:
+- 6 km = 6000 Meter
+- 3 Spuren
+- Länge eines Autos : ca. 4 bis 6 Meter
+- Sicherheitsabstand im Stau : 5 Meter
+- Personen pro Auto: ca. 1,3 bis 1,5
+
+Windeln China:
+- Bevölkerung China: ca. 1,4 Milliarden
+- Geburten pro Jahr: ca. 7 bis 9 Millionen
+- Windelalter: ca. 0 bis 3 Jahre
+- Windeln pro Tag: ca. 4 bis 6
+
+Kaffee Berlin:
+- Bevölkerung Berlin: ca. 3,9 Millionen
+- Erwachsene: grob 82 % was ca 3 Millione entspricht
+- Kaffeetrinkende Erwachsene: ca. 60 bis 80 %
+- Tassen pro Kaffeetrinker pro Werktag: 2,8 Tassen
+"""
+
 app = Flask(__name__)
 CORS(app)
 
@@ -182,7 +211,7 @@ Antwortstil:
 - Maximal 8 Wörter pro Satz.
 - Keine Wörter wie "plausibel", "Bereich", "je nach".
 
-""" + FERMI_GUARD
+""" + REFERENZWERTE + FERMI_GUARD
 
 
 
@@ -221,7 +250,7 @@ Antwortstil:
 - Maximal 8 Wörter pro Satz.
 - Keine Nebensätze.
 
-""" + SPRACHE_REGEL + FERMI_GUARD
+""" + REFERENZWERTE + SPRACHE_REGEL + FERMI_GUARD
 
 CDU_PROMPT = """
 
@@ -234,7 +263,7 @@ Help the user think more deeply.
 Ask clarifying questions.
 Do NOT provide a final estimate.
 Keep your responses concise and focused (2–4 sentences). Avoid long explanations or complete solutions. Focus on reacting to the user’s assumptions and supporting their reasoning.
-"""+ SPRACHE_REGEL + FERMI_GUARD
+"""+ REFERENZWERTE + SPRACHE_REGEL + FERMI_GUARD
 
 @app.route("/", methods=["GET"])
 def home():
