@@ -214,7 +214,7 @@ Antwortstil:
 - Maximal 8 Wörter pro Satz.
 - Keine Nebensätze.
 
-"""+ SPRACHE_REGEL + FERMI_GUARD
+""" + SPRACHE_REGEL + FERMI_GUARD
 
 CDU_PROMPT = """
 
@@ -253,13 +253,13 @@ def chat():
 
     print("GRUPPE:", group)
 
-   response = client.responses.create(
-    model="gpt-4.1-mini",
-    input=[
-        {"role": "system", "content": system_prompt},
-        *history
-    ]
-)
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=[
+            {"role": "system", "content": system_prompt},
+            *history
+        ]
+    )
 
     reply = response.output[0].content[0].text
 
