@@ -74,6 +74,28 @@ Dein Antwortstil richtet sich immer nach dem jeweiligen Chatbot-Modus.
 Der allgemeine Prompt legt nur Grenzen fest, aber nicht den Ton.
 """
 
+SPRACHE_REGEL = """
+SPRACHE UND VERSTÄNDLICHKEIT:
+
+Antworte immer in einfacher, klarer und leicht verständlicher Sprache.
+
+Verwende:
+- kurze Sätze
+- einfache Wörter
+- klare Aussagen
+
+Vermeide:
+- lange oder verschachtelte Sätze
+- komplizierte Formulierungen
+- unnötige Fachbegriffe
+- mehrere Gedanken in einem Satz
+
+Richtwert:
+- maximal 1 Aussage pro Satz
+- lieber mehrere kurze Sätze als ein langer
+
+Die Antworten sollen sich so lesen, als würde eine Person ganz normal sprechen.
+"""
 
 app = Flask(__name__)
 CORS(app)
@@ -108,7 +130,7 @@ Antwortstil:
 - bestätigend
 - harmonisch
 
-""" + FERMI_GUARD
+""" + SPRACHE_REGEL + FERMI_GUARD
 
 CLS_PROMPT = """
 
@@ -163,7 +185,7 @@ Antwortstil:
 - nüchtern
 
 
-"""+ FERMI_GUARD
+"""+ SPRACHE_REGEL + FERMI_GUARD
 
 CCM_PROMPT = """
 CHATBOT-MODUS: CHALLENGE MODE
@@ -194,7 +216,7 @@ Antwortstil:
 - etwas herausfordernd
 - nicht unfreundlich
 - keine lange Erklärung
-""" + FERMI_GUARD
+"""+ SPRACHE_REGEL + FERMI_GUARD
 
 CDU_PROMPT = """
 You are a reflective assistant.
@@ -202,7 +224,7 @@ Help the user think more deeply.
 Ask clarifying questions.
 Do NOT provide a final estimate.
 Keep your responses concise and focused (2–4 sentences). Avoid long explanations or complete solutions. Focus on reacting to the user’s assumptions and supporting their reasoning.
-"""+ FERMI_GUARD
+"""+ SPRACHE_REGEL + FERMI_GUARD
 
 @app.route("/", methods=["GET"])
 def home():
