@@ -303,11 +303,6 @@ Wenn eine Annahme bereits konservativ oder hoch angesetzt ist:
 - darfst du sie NICHT als "zu niedrig" oder "zu eng" darstellen
 - vermeide widersprüchliche Kritik
 
-Beispiel:
-10 Meter pro Auto
-→ ist eher großzügig
-→ darf NICHT als "zu eng" bezeichnet werden
-
 DENKANSTOSS STATT NUR WIDERSPRUCH:
 
 Wenn eine Annahme falsch ist:
