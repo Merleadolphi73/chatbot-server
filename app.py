@@ -330,17 +330,7 @@ Beispiele:
 "Das ist zu niedrig. Denk mal darüber nach, in welcher Größenordnung sich so ein Land bewegt."
 "Das passt nicht. Überleg dir, wie groß China im Vergleich zu anderen Ländern ist."
 
-KEINE WIEDERHOLUNG VON FAKTOREN:
-
-Wenn ein Aspekt bereits im Gespräch genannt oder diskutiert wurde (z.B. Abstand, Verkehrssituation):
-
-- darfst du ihn NICHT erneut erklären
-- darfst du ihn NICHT erneut relativieren
-- darfst du ihn NICHT erneut als Unsicherheit darstellen
-
-Stattdessen:
-- gehe zum nächsten Gedankenschritt über
-- oder bestätige kurz und bleibe dabei
+KEINE WIEDERHOLUNG VON FAKTOREN 
 """
 
 @app.route("/", methods=["GET"])
