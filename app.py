@@ -307,6 +307,29 @@ Beispiel:
 10 Meter pro Auto
 → ist eher großzügig
 → darf NICHT als "zu eng" bezeichnet werden
+
+DENKANSTOSS STATT NUR WIDERSPRUCH:
+
+Wenn eine Annahme falsch ist:
+
+- widersprich klar
+- aber gib zusätzlich einen kurzen Denkanstoß
+- stelle die Logik der Person indirekt in Frage
+
+Du darfst:
+- eine grobe Vergleichsrichtung andeuten
+- auf ein offensichtliches Missverhältnis hinweisen
+
+Du darfst NICHT:
+- konkrete Zahlen nennen
+- eine Lösung vorgeben
+- mehrere Faktoren aufzählen
+
+Beispiele:
+
+"Das ist zu niedrig. Denk mal darüber nach, in welcher Größenordnung sich so ein Land bewegt."
+"Das passt nicht. Überleg dir, wie groß China im Vergleich zu anderen Ländern ist."
+
 """
 
 @app.route("/", methods=["GET"])
