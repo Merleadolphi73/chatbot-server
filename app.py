@@ -171,11 +171,14 @@ def home():
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json() or {}
+
     message = data.get("message", "")
+
     if is_final_estimate(message):
-    return jsonify({
-        "reply": "Entschuldigung, zu finalen Schätzungen darf ich keine Angabe machen."
-    })
+        return jsonify({
+            "reply": "Entschuldigung, zu finalen Schätzungen darf ich keine Angabe machen."
+        })
+
     group = data.get("group")
     task = data.get("task", "")
     history = data.get("history", [])
@@ -192,23 +195,26 @@ def chat():
         system_prompt = CLS_PROMPT
 
     print("GRUPPE:", group)
+
     task_prompt = f"""
-        AKTUELLE AUFGABE:
-        {task}
-        
-        Antworte nur zu dieser Aufgabe.
-        Nutze nur passende Referenzwerte.
-        Ignoriere alle anderen Fermi-Aufgaben.
-        
-        Wenn die Nachricht nicht zur aktuellen Aufgabe passt:
-        Antworte exakt:
-        "Das gehört nicht zur aktuellen Aufgabe. Bitte bleibe bei dieser Schätzung."
-        """
+    AKTUELLE AUFGABE:
+    {task}
+
+    Antworte nur zu dieser Aufgabe.
+    Nutze nur passende Referenzwerte.
+    Ignoriere alle anderen Fermi-Aufgaben.
+
+    Wenn die Nachricht nicht zur aktuellen Aufgabe passt:
+    Antworte exakt:
+    "Das gehört nicht zur aktuellen Aufgabe. Bitte bleibe bei dieser Schätzung."
+    """
+
     response = client.responses.create(
         model="gpt-4.1-mini",
         input=[
             {"role": "system", "content": system_prompt + task_prompt},
-            *history
+            *history,
+            {"role": "user", "content": message}
         ]
     )
 
