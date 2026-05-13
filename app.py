@@ -198,14 +198,14 @@ def chat():
     data = request.get_json() or {}
 
     message = data.get("message", "")
+    task = data.get("task", "")
 
-    if is_final_estimate(message):
+    if is_final_estimate(message, task):
         return jsonify({
             "reply": "Entschuldigung, zu finalen Schätzungen darf ich keine Angabe machen."
         })
 
     group = data.get("group")
-    task = data.get("task", "")
     history = data.get("history", [])
 
     if group == 1:
