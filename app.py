@@ -195,10 +195,10 @@ def home():
 def chat():
     data = request.get_json() or {}
 
-   message = data.get("message", "")
-   task = data.get("task", "")
+    message = data.get("message", "")
+    task = data.get("task", "")
 
-   if classify_final_estimate(message, task):
+    if classify_final_estimate(message, task):
         return jsonify({
             "reply": "Entschuldigung, zu finalen Schätzungen darf ich keine Angabe machen."
         })
