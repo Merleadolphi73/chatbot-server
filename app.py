@@ -56,21 +56,46 @@ CORS(app)
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
-def is_final_estimate(message):
+def is_final_estimate(message, task):
     msg = message.lower()
+    task_l = task.lower()
 
-    final_markers = [
-        "insgesamt", "gesamt", "am ende", "final", "ergibt",
-        "stimmt das", "kommt das hin", "passt das", "richtig",
-        "also", "dann sind", "dann wären", "dann ist",
-        "menschen sind", "leute sind", "autos sind",
-        "windeln", "schulen", "tassen kaffee"
+    has_number = any(char.isdigit() for char in msg)
+    if not has_number:
+        return False
+
+    # Teilannahmen NICHT blocken
+    partial_markers = [
+        "pro auto", "pro person", "pro kind", "pro tag", "pro spur",
+        "pro km", "abstand", "lücke", "personen pro auto",
+        "kinder", "bevölkerung", "einwohner", "alter", "anteil"
     ]
 
-    number_markers = any(char.isdigit() for char in msg)
-    has_final_marker = any(marker in msg for marker in final_markers)
+    if any(marker in msg for marker in partial_markers):
+        return False
 
-    return number_markers and has_final_marker
+    # Aufgabe 1: Schulen Deutschland
+    if "schulen" in task_l:
+        return "schule" in msg or "schulen" in msg
+
+    # Aufgabe 2: Menschen im Stau
+    if "stau" in task_l:
+        final_words = ["menschen", "personen", "leute", "betroffen"]
+        return any(word in msg for word in final_words) and (
+            "stau" in msg or "insgesamt" in msg or "gesamt" in msg or "dann" in msg or "also" in msg
+        )
+
+    # Aufgabe 3: Windeln China
+    if "windeln" in task_l:
+        return "windel" in msg or "windeln" in msg
+
+    # Aufgabe 4: Kaffee Berlin
+    if "kaffee" in task_l:
+        return ("kaffee" in msg or "tassen" in msg) and (
+            "berlin" in msg or "am tag" in msg or "werktag" in msg or "insgesamt" in msg or "gesamt" in msg
+        )
+
+    return False
     
 CHS_PROMPT = BASE_RULES + """
 MODUS: High Sycophancy
