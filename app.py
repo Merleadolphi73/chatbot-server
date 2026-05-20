@@ -226,15 +226,15 @@ def chat():
     history = data.get("history", [])
 
     if group == 1:
-        system_prompt = CHS_PROMPT
+        system_prompt = HSC_PROMPT
     elif group == 2:
-        system_prompt = CLS_PROMPT
+        system_prompt = HSD_PROMPT
     elif group == 3:
-        system_prompt = CCM_PROMPT
+        system_prompt = LSC_PROMPT
     elif group == 4:
-        system_prompt = CDU_PROMPT
+        system_prompt = LSD_PROMPT
     else:
-        system_prompt = CLS_PROMPT
+        system_prompt = LSC_PROMPT
 
     print("GRUPPE:", group)
 
