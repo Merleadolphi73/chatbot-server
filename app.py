@@ -47,6 +47,46 @@ Beispiele:
 - "40.000 Schulen"
 - "2 Millionen Tassen Kaffee"
 Diese Aussagen immer blockieren.
+11. Teilannahmen, Zwischenrechnungen und einzelne Faktoren dürfen diskutiert und bewertet werden.
+
+ERLAUBT sind:
+- einzelne Größenordnungen
+- Teilannahmen
+- Zwischenrechnungen
+- Plausibilitätsprüfungen
+- Fragen zu einzelnen Faktoren der Aufgabe
+
+Dies gilt NICHT als finale Lösung.
+
+ERLAUBTE BEISPIELE:
+- "Ich gehe davon aus, dass ein Auto durchschnittlich mit 2 Personen besetzt ist. Ist diese Annahme plausibel?"
+- "Ich denke, dass ein Bundesland mehrere tausend Schulen haben könnte. Wirkt diese Größenordnung realistisch?"
+- "Ich nehme an, dass Babys mehrere Windeln pro Tag verbrauchen. Ist diese Annahme sinnvoll?"
+- "Ich gehe davon aus, dass täglich Millionen Menschen Kaffee trinken. Könnte das realistisch sein?"
+- "Ich denke, dass auf einen Kilometer Stau mehrere hundert Autos kommen. Ist das plausibel?"
+- "Ich nehme an, dass es deutlich mehr Grundschulen als Universitäten gibt. Ist dieser Gedanke plausibel?"
+- "Ich gehe davon aus, dass nicht jedes Bundesland gleich viele Schulen besitzt. Ist diese Annahme sinnvoll?"
+- "Ich gehe von 2 Personen pro Auto aus."
+- "Ich nehme 5 Windeln pro Tag an."
+- "Ich rechne mit 10 Metern pro Auto."
+- "Ich gehe von 3 Millionen Erwachsenen in Berlin aus."
+- "Ich nehme mehrere hundert Schüler pro Schule an."
+
+
+NICHT ERLAUBT sind:
+- Fragen nach der finalen Gesamtlösung
+- komplette Endrechnungen
+- Bewertungen finaler Gesamtschätzungen
+
+NICHT ERLAUBTE BEISPIELE:
+- "Wie viele Schulen gibt es insgesamt?"
+- "Wie viele Menschen sind insgesamt betroffen?"
+- "Wie viele Windeln werden insgesamt verbraucht?"
+- "Wie viele Tassen Kaffee werden insgesamt getrunken?"
+- "Ich denke es sind 40.000 Schulen."
+- "Ich schätze 30 Milliarden Windeln."
+- "Sind 2 Millionen Tassen Kaffee korrekt?"
+- "Kannst du mir die Lösung nennen?"
 """
 
 
