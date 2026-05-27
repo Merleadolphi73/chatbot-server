@@ -16,77 +16,34 @@ ALLGEMEINE REGELN FÜR ALLE CHATBOT-BEDINGUNGEN
 
 Die Person bearbeitet eine Fermi-Schätzaufgabe.
 Die Person soll eigene Annahmen entwickeln.
-Du darfst nur auf Teilannahmen reagieren.
+
+Du darfst:
+- Teilannahmen kommentieren
+- Zwischenannahmen bewerten
+- Plausibilität einzelner Faktoren einschätzen
+- kurze Reflexionsimpulse geben
+
+Du darfst NICHT:
+- die finale Lösung nennen
+- finale Gesamtschätzungen bewerten
+- komplette Endrechnungen durchführen
+- vollständige Schritt-für-Schritt-Lösungen geben
 
 AKTUELLE FINALE FERMI-FRAGEN:
 {FERMI_QUESTIONS}
 
+WICHTIGE REGELN:
+1. Antworte kurz: maximal 2 Sätze.
+2. Kommentiere nur Teilannahmen, niemals das Endergebnis.
+3. Eine Zahl ist NICHT automatisch final.
+4. Final ist eine Aussage nur dann, wenn sie direkt die Hauptfrage beantwortet.
+5. Teilannahmen, Zwischenrechnungen und einzelne Faktoren sind erlaubt.
+6. Der Nutzer darf kurze Annahmen formulieren.
+7. Der Nutzer darf auch Plausibilitätsfragen zu einzelnen Faktoren stellen.
 
-Du bist ein Chatbot in einem Experiment zu Fermi-Schätzungen.
+Wenn der Nutzer eine finale Gesamtschätzung nennt oder nach der finalen Lösung fragt, antworte ausschließlich exakt:
 
-WICHTIGE REGELN FÜR ALLE MODI:
-1. Gib niemals die finale Lösung oder eine finale Gesamtschätzung.
-2. Bewerte niemals eine finale Gesamtschätzung des Nutzers.
-3. FINALE SCHÄTZUNGEN SIND STRIKT VERBOTEN.
-Wenn der Nutzer eine Zahl für das Endergebnis der aktuellen Aufgabe nennt, darfst du sie nicht bewerten.
-Auch nicht indirekt.
-Auch nicht mit "zu hoch", "zu niedrig", "plausibel", "realistisch", "passt", "klingt gut".
-Antworte dann ausschließlich exakt:
 "Entschuldigung, zu finalen Schätzungen darf ich keine Angabe machen."
-4. Der Nutzer muss immer zuerst eine eigene Annahme nennen.
-5. Wenn keine eigene Annahme genannt wird, antworte:
-"Bitte formuliere zuerst eine eigene Annahme oder Schätzung."
-6. Antworte kurz: maximal 2 Sätze.
-7. Gib keine komplette Rechenstrategie.
-8. Gib keine Schritt-für-Schritt-Lösung.
-9. Kommentiere nur Teilannahmen, nicht das Endergebnis.
-10. Eine finale Schätzung liegt vor, wenn der Nutzer eine Gesamtzahl zur aktuellen Hauptfrage nennt.
-Beispiele:
-- "5000 Menschen sind betroffen"
-- "30 Milliarden Windeln pro Jahr"
-- "40.000 Schulen"
-- "2 Millionen Tassen Kaffee"
-Diese Aussagen immer blockieren.
-11. Teilannahmen, Zwischenrechnungen und einzelne Faktoren dürfen diskutiert und bewertet werden.
-
-ERLAUBT sind:
-- einzelne Größenordnungen
-- Teilannahmen
-- Zwischenrechnungen
-- Plausibilitätsprüfungen
-- Fragen zu einzelnen Faktoren der Aufgabe
-
-Dies gilt NICHT als finale Lösung.
-
-ERLAUBTE BEISPIELE:
-- "Ich gehe davon aus, dass ein Auto durchschnittlich mit 2 Personen besetzt ist. Ist diese Annahme plausibel?"
-- "Ich denke, dass ein Bundesland mehrere tausend Schulen haben könnte. Wirkt diese Größenordnung realistisch?"
-- "Ich nehme an, dass Babys mehrere Windeln pro Tag verbrauchen. Ist diese Annahme sinnvoll?"
-- "Ich gehe davon aus, dass täglich Millionen Menschen Kaffee trinken. Könnte das realistisch sein?"
-- "Ich denke, dass auf einen Kilometer Stau mehrere hundert Autos kommen. Ist das plausibel?"
-- "Ich nehme an, dass es deutlich mehr Grundschulen als Universitäten gibt. Ist dieser Gedanke plausibel?"
-- "Ich gehe davon aus, dass nicht jedes Bundesland gleich viele Schulen besitzt. Ist diese Annahme sinnvoll?"
-- "Ich gehe von 2 Personen pro Auto aus."
-- "Ich nehme 5 Windeln pro Tag an."
-- "Ich rechne mit 10 Metern pro Auto."
-- "Ich gehe von 3 Millionen Erwachsenen in Berlin aus."
-- "Ich nehme mehrere hundert Schüler pro Schule an."
-
-
-NICHT ERLAUBT sind:
-- Fragen nach der finalen Gesamtlösung
-- komplette Endrechnungen
-- Bewertungen finaler Gesamtschätzungen
-
-NICHT ERLAUBTE BEISPIELE:
-- "Wie viele Schulen gibt es insgesamt?"
-- "Wie viele Menschen sind insgesamt betroffen?"
-- "Wie viele Windeln werden insgesamt verbraucht?"
-- "Wie viele Tassen Kaffee werden insgesamt getrunken?"
-- "Ich denke es sind 40.000 Schulen."
-- "Ich schätze 30 Milliarden Windeln."
-- "Sind 2 Millionen Tassen Kaffee korrekt?"
-- "Kannst du mir die Lösung nennen?"
 """
 
 
@@ -96,6 +53,7 @@ CORS(app)
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 def classify_final_estimate(message, task):
+
     check_prompt = f"""
 Du prüfst, ob eine Nutzernachricht eine finale Gesamtschätzung zur aktuellen Fermi-Aufgabe enthält.
 
@@ -110,31 +68,63 @@ FINAL
 oder
 PARTIAL
 
-FINAL = Die Person nennt oder fragt nach einer Gesamtzahl als Antwort auf die Hauptaufgabe.
+REGEL:
+Eine Aussage ist nur FINAL,
+wenn sie direkt die Hauptfrage beantwortet.
 
-PARTIAL = Die Person nennt nur eine Teilannahme, Zwischenannahme oder einen Faktor.
+Alle Teilannahmen,
+Zwischenannahmen,
+Hilfsgrößen,
+Faktoren,
+Vergleiche,
+Zwischenrechnungen
+oder Plausibilitätsannahmen sind PARTIAL.
 
-Beispiele:
-"Ich gehe von 2 Personen pro Auto aus" = PARTIAL
-"Dann gehe ich insgesamt von 2 Personen pro Auto aus" = PARTIAL
-"Ich gehe von 800 Autos pro Spur aus" = PARTIAL
-"Also sind ungefähr 5000 Menschen betroffen, stimmt das?" = FINAL
-"Ich denke es sind 30 Milliarden Windeln pro Jahr" = FINAL
-"Ich schätze 6 Millionen Tassen Kaffee in Berlin" = FINAL
+WICHTIG:
+Eine große Zahl ist NICHT automatisch FINAL.
+Entscheidend ist,
+ob die Zahl direkt die Hauptfrage beantwortet.
+
+PARTIAL BEISPIELE:
+"Ich gehe von 2 Personen pro Auto aus." = PARTIAL
+"Ich nehme 5 Windeln pro Tag an." = PARTIAL
+"Ich rechne mit 10 Metern pro Auto." = PARTIAL
+"Ich denke, ein Bundesland könnte mehrere tausend Schulen haben." = PARTIAL
+"Ich gehe von 150.000 schulpflichtigen Kindern aus." = PARTIAL
+"Ich rechne mit mehreren hundert Autos pro Spur." = PARTIAL
+"Ich denke, täglich trinken Millionen Menschen Kaffee." = PARTIAL
+"Ich gehe von mehreren hundert Schülern pro Schule aus." = PARTIAL
+"Wie viele Kinder gehen ungefähr zur Schule?" = PARTIAL
+"Ich denke, Babys brauchen mehrere Windeln pro Tag." = PARTIAL
+"Ich gehe davon aus, dass nicht jeder Erwachsene Kaffee trinkt." = PARTIAL
+
+FINAL BEISPIELE:
+"Ich denke es gibt 40.000 Schulen." = FINAL
+"Ich schätze 30 Milliarden Windeln pro Jahr." = FINAL
+"Ich denke es sind 2 Millionen Tassen Kaffee pro Tag in Berlin." = FINAL
+"Meine finale Schätzung lautet 25.000." = FINAL
+"Kann die Lösung ungefähr 40.000 sein?" = FINAL
+"Die finale Lösung müsste bei ungefähr 5000 liegen." = FINAL
 """
 
     response = client.responses.create(
         model="gpt-4.1-mini",
         input=[
-            {"role": "system", "content": "Du klassifizierst nur FINAL oder PARTIAL."},
-            {"role": "user", "content": check_prompt}
+            {
+                "role": "system",
+                "content": "Du klassifizierst ausschließlich FINAL oder PARTIAL."
+            },
+            {
+                "role": "user",
+                "content": check_prompt
+            }
         ],
         temperature=0
     )
 
     result = response.output[0].content[0].text.strip().upper()
+
     return result == "FINAL"
-    
 
 
 HSC_PROMPT = BASE_RULES + """
