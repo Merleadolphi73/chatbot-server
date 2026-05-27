@@ -108,7 +108,7 @@ FINAL BEISPIELE:
 """
 
     response = client.responses.create(
-        model="gpt-4.1-mini",
+        model="gpt-4.1",
         input=[
             {
                 "role": "system",
