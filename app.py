@@ -108,7 +108,7 @@ FINAL BEISPIELE:
 """
 
     response = client.responses.create(
-        model="gpt-4.1",
+        model="gpt-5.5",
         input=[
             {
                 "role": "system",
@@ -389,7 +389,7 @@ def chat():
     """
 
     response = client.responses.create(
-        model="gpt-4.1-mini",
+        model="gpt-5.5",
         input=[
             {"role": "system", "content": system_prompt + task_prompt},
             *history,
@@ -453,7 +453,7 @@ def job():
         """
 
     response = client.responses.create(
-        model="gpt-4.1-mini",
+        model="gpt-5.5",
         input=[
             {"role": "system", "content": "Du erstellst professionelle deutsche Stellenanzeigen."},
             {"role": "user", "content": prompt}
@@ -466,13 +466,3 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
-from openai import OpenAI
-
-client = OpenAI()
-
-models = client.models.list()
-
-for model in models.data:
-    print(model.id)
-
-exit()
