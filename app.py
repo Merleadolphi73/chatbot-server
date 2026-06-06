@@ -230,7 +230,6 @@ FINAL BEISPIELE:
                 "content": check_prompt
             }
         ],
-        temperature=0
     )
 
     result = response.output[0].content[0].text.strip().upper()
