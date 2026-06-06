@@ -465,3 +465,14 @@ def job():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
+from openai import OpenAI
+
+client = OpenAI()
+
+models = client.models.list()
+
+for model in models.data:
+    print(model.id)
+
+exit()
