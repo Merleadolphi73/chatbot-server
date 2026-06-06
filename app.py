@@ -107,23 +107,21 @@ FINAL BEISPIELE:
 "Die finale Lösung müsste bei ungefähr 5000 liegen." = FINAL
 """
 
-    response = client.responses.create(
-        model="gpt-5.5",
-        input=[
-            {
-                "role": "system",
-                "content": "Du klassifizierst ausschließlich FINAL oder PARTIAL."
-            },
-            {
-                "role": "user",
-                "content": check_prompt
-            }
-        ],
-        temperature=0
-    )
+ response = client.responses.create(
+    model="gpt-5.5",
+    input=[
+        {
+            "role": "system",
+            "content": "Du klassifizierst ausschließlich FINAL oder PARTIAL. Gib exakt FINAL oder PARTIAL aus."
+        },
+        {
+            "role": "user",
+            "content": check_prompt
+        }
+    ]
+)
 
-    result = response.output[0].content[0].text.strip().upper()
-
+    result = response.output_text.strip().upper()
     return result == "FINAL"
 
 
@@ -397,7 +395,7 @@ def chat():
         ]
     )
 
-    reply = response.output[0].content[0].text
+    reply = response.output_text
 
     return jsonify({"reply": reply})
 
@@ -460,7 +458,7 @@ def job():
         ]
     )
 
-    job_text = response.output[0].content[0].text
+    job_text = response.output_text
     return jsonify({"job": job_text})
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
