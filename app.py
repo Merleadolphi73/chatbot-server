@@ -107,7 +107,8 @@ FINAL BEISPIELE:
 "Die finale Lösung müsste bei ungefähr 5000 liegen." = FINAL
 """
 
-     response = client.responses.create(
+
+    response = client.responses.create(
         model="gpt-5.5",
         input=[
             {
@@ -122,6 +123,7 @@ FINAL BEISPIELE:
     )
 
     result = response.output_text.strip().upper()
+
     return result == "FINAL"
 
 
