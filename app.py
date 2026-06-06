@@ -232,7 +232,7 @@ FINAL BEISPIELE:
         ],
     )
 
-    result = response.output[0].content[0].text.strip().upper()
+   result = response.output_text.strip().upper()
 
     return result == "FINAL"
 
@@ -482,7 +482,7 @@ def chat():
         ]
     )
 
-    reply = response.output[0].content[0].text
+    reply = response.output_text
 
     return jsonify({"reply": reply})
 
@@ -545,7 +545,7 @@ def job():
         ]
     )
 
-    job_text = response.output[0].content[0].text
+    job_text = response.output_text
     return jsonify({"job": job_text})
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
