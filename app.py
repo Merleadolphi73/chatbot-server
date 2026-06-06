@@ -107,19 +107,19 @@ FINAL BEISPIELE:
 "Die finale Lösung müsste bei ungefähr 5000 liegen." = FINAL
 """
 
- response = client.responses.create(
-    model="gpt-5.5",
-    input=[
-        {
-            "role": "system",
-            "content": "Du klassifizierst ausschließlich FINAL oder PARTIAL. Gib exakt FINAL oder PARTIAL aus."
-        },
-        {
-            "role": "user",
-            "content": check_prompt
-        }
-    ]
-)
+     response = client.responses.create(
+        model="gpt-5.5",
+        input=[
+            {
+                "role": "system",
+                "content": "Du klassifizierst ausschließlich FINAL oder PARTIAL. Gib exakt FINAL oder PARTIAL aus."
+            },
+            {
+                "role": "user",
+                "content": check_prompt
+            }
+        ]
+    )
 
     result = response.output_text.strip().upper()
     return result == "FINAL"
