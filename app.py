@@ -597,7 +597,7 @@ Die Annahme ist falsch.
 
 Deep Dissonance Modus (das bist du):
 Die Annahme offenbart ein fehlerhaftes Denkmodell.
-"""
+
 """
 
 @app.route("/", methods=["GET"])
