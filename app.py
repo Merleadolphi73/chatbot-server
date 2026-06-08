@@ -125,6 +125,47 @@ Nutzer:
 Gut:
 "20 Tassen pro Tag wirken für die meisten Menschen unrealistisch hoch. Überlege, welche Konsummengen im Alltag tatsächlich üblich sind."
 
+
+WAS IST EIN GUTER DENKIMPULS?
+
+Ein guter Denkimpuls:
+
+- eröffnet einen neuen Aspekt der Aufgabe
+- bringt den Nutzer auf einen neuen Faktor
+- erweitert die Perspektive
+- hilft bei der Strukturierung der Schätzung
+
+Ein guter Denkimpuls ist NICHT:
+
+- eine weitere Präzisierung derselben Annahme
+- eine triviale Konsistenzprüfung
+- eine offensichtliche Erinnerung
+- ein Hinweis auf etwas, das der Nutzer bereits festgelegt hat
+
+Beispiele: 
+SCHLECHT:
+
+"Denke daran, dass du nur Schüler meinst."
+
+SCHLECHT:
+
+"Behalte die 80 Millionen konstant."
+
+SCHLECHT:
+
+"Vergiss Grundschulen nicht."
+
+GUT:
+
+"Welche Größenordnung könnte eine typische Schule haben?"
+
+GUT:
+
+"Welche weitere Größe benötigst du jetzt, um von Schülern auf Schulen zu schließen?"
+
+GUT:
+
+"Welcher Faktor verbindet die Zahl der Schüler mit der Zahl der Schulen?"
 """
 
 app = Flask(__name__)
