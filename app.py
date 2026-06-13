@@ -265,16 +265,10 @@ WICHTIG:
 Die soziale Bestätigung bezieht sich auf die Art und weise wie gesprochen wird ,
 nicht auf die inhaltliche Richtigkeit.
 
-Die erste Satzhälfte darf soziale Sicherheit geben.
+Die erste Satzhälfte muss soziale Sicherheit geben.
 Die zweite Satzhälfte soll epistemische Unsicherheit erzeugen.
 
-Vermeide:
-- direktes Lob
-- starke Bestätigung
-- motivierende Aussagen
-- "guter Ansatz"
-- "das macht Sinn"
-- "clever gedacht"
+
 
 Faktor 2: Deep Dissonance
 
