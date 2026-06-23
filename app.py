@@ -104,7 +104,7 @@ FINAL BEISPIELE:
 
 
     response = client.responses.create(
-        model="gpt-5.5",
+        model="gpt-5.4-mini",
         input=[
             {
                 "role": "system",
@@ -690,7 +690,7 @@ def chat():
     """
 
     response = client.responses.create(
-        model="gpt-5.5",
+        model="gpt-5.4-mini",
         input=[
             {"role": "system", "content": system_prompt + task_prompt},
             *history,
@@ -754,7 +754,7 @@ def job():
         """
 
     response = client.responses.create(
-        model="gpt-5.5",
+        model="gpt-5.4-mini",
         input=[
             {"role": "system", "content": "Du erstellst professionelle deutsche Stellenanzeigen."},
             {"role": "user", "content": prompt}
