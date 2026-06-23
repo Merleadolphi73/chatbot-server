@@ -6,9 +6,8 @@ from openai import OpenAI
 
 FERMI_QUESTIONS = """
 1. Wie viele Schulen gibt es aktuell in ganz Deutschland?
-2. Wie viele Menschen sind schätzungsweise von einem 6 km langen Stau auf einer dreispurigen Autobahn betroffen?
-3. Wie viele Einwegwindeln werden pro Jahr in China verbraucht?
-4. Wie viele Tassen Kaffee werden an einem durchschnittlichen Werktag in Berlin getrunken?
+2. Wie viele Einwegwindeln werden pro Jahr in China verbraucht?
+
 """
 
 BASE_RULES = f"""
@@ -64,17 +63,33 @@ oder
 PARTIAL
 
 REGEL:
-Eine Aussage ist nur FINAL,
-wenn sie direkt die Hauptfrage beantwortet.
+FINAL ist eine Nachricht nur dann, wenn sie direkt die gesuchte Zielgröße der aktuellen Hauptfrage nennt oder danach fragt.
 
-Alle Teilannahmen,
-Zwischenannahmen,
-Hilfsgrößen,
-Faktoren,
-Vergleiche,
-Zwischenrechnungen
-Bevölkerungszahlen, Altersgruppen, Geburtenzahlen, Haushalte oder andere Basisgrößen
-oder Plausibilitätsannahmen sind PARTIAL.
+PARTIAL ist alles, was nur eine Hilfsgröße, Teilannahme, Zwischenannahme, Vergleichsgröße oder ein einzelner Faktor ist.
+
+WICHTIG:
+Im Zweifel immer PARTIAL wählen.
+Blockiere nur, wenn eindeutig eine finale Gesamtschätzung zur Hauptfrage vorliegt.
+
+Basisgrößen sind immer PARTIAL:
+- Bevölkerungszahlen
+- Anzahl Kinder / Babys / Erwachsene
+- Anzahl Haushalte
+- Geburten pro Jahr
+- Windeln pro Kind
+- Schüler pro Schule
+- Schulen pro Bundesland
+- Alle Teilannahmen
+- Zwischenannahmen,
+- Hilfsgrößen,
+- Faktoren,
+- Vergleiche,
+- Zwischenrechnungen
+- Bevölkerungszahlen, 
+- Altersgruppen, 
+- Geburtenzahlen, 
+- Haushalte oder andere Basisgrößen
+- Plausibilitätsannahmen 
 
 WICHTIG:
 Eine große Zahl ist NICHT automatisch FINAL.
@@ -82,31 +97,30 @@ Entscheidend ist,
 ob die Zahl direkt die Hauptfrage beantwortet.
 
 PARTIAL BEISPIELE:
-"Ich gehe von 2 Personen pro Auto aus." = PARTIAL
-"Ich nehme 5 Windeln pro Tag an." = PARTIAL
-"Ich rechne mit 10 Metern pro Auto." = PARTIAL
-"Ich denke, ein Bundesland könnte mehrere tausend Schulen haben." = PARTIAL
-"Ich gehe von 150.000 schulpflichtigen Kindern aus." = PARTIAL
-"Ich rechne mit mehreren hundert Autos pro Spur." = PARTIAL
-"Ich denke, täglich trinken Millionen Menschen Kaffee." = PARTIAL
-"Ich gehe von mehreren hundert Schülern pro Schule aus." = PARTIAL
-"Wie viele Kinder gehen ungefähr zur Schule?" = PARTIAL
-"Ich denke, Babys brauchen mehrere Windeln pro Tag." = PARTIAL
-"Ich gehe davon aus, dass nicht jeder Erwachsene Kaffee trinkt." = PARTIAL
+
+
 "Wie viele Menschen leben ungefähr in China?" = PARTIAL
-"Wie viele Menschen wohnen ungefähr in Deutschland?" = PARTIAL
-"Wie viele Menschen leben ungefähr in Berlin?" = PARTIAL
+"Wie viele Menschen leben ungefähr in Deutschland?" = PARTIAL
+"Ich gehe von 1,4 Milliarden Menschen in China aus." = PARTIAL
+"Ich gehe von 84 Millionen Menschen in Deutschland aus." = PARTIAL
 "Wie viele Kinder gibt es ungefähr in Deutschland?" = PARTIAL
+"Ich gehe von 10 Millionen Schülern aus." = PARTIAL
+"Ich nehme 500 Schüler pro Schule an." = PARTIAL
+"Ich denke, ein Bundesland könnte mehrere tausend Schulen haben." = PARTIAL
 "Wie viele Babys gibt es ungefähr in China?" = PARTIAL
-"Wie viele Erwachsene leben ungefähr in Berlin?" = PARTIAL
+"Ich nehme 10 Millionen Geburten pro Jahr in China an." = PARTIAL
+"Ich rechne mit 5 Windeln pro Baby pro Tag." = PARTIAL
+"Ich nehme an, dass Kinder 2 Jahre Windeln tragen." = PARTIAL
 
 FINAL BEISPIELE:
-"Ich denke es gibt 40.000 Schulen." = FINAL
+"Wie viele Schulen gibt es insgesamt in Deutschland?" = FINAL
+"Ich schätze 40.000 Schulen in Deutschland." = FINAL
+"Meine finale Schätzung sind 35.000 Schulen." = FINAL
+"Kann die Lösung ungefähr 40.000 Schulen sein?" = FINAL
+"Wie viele Einwegwindeln werden pro Jahr in China verbraucht?" = FINAL
 "Ich schätze 30 Milliarden Windeln pro Jahr." = FINAL
-"Ich denke es sind 2 Millionen Tassen Kaffee pro Tag in Berlin." = FINAL
-"Meine finale Schätzung lautet 25.000." = FINAL
-"Kann die Lösung ungefähr 40.000 sein?" = FINAL
-"Die finale Lösung müsste bei ungefähr 5000 liegen." = FINAL
+"Meine finale Antwort sind 25 Milliarden Windeln." = FINAL
+"Kann die Lösung ungefähr 30 Milliarden Windeln sein?" = FINAL
 """
 
 
