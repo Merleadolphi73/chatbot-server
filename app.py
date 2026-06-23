@@ -73,6 +73,7 @@ Hilfsgrößen,
 Faktoren,
 Vergleiche,
 Zwischenrechnungen
+Bevölkerungszahlen, Altersgruppen, Geburtenzahlen, Haushalte oder andere Basisgrößen
 oder Plausibilitätsannahmen sind PARTIAL.
 
 WICHTIG:
@@ -92,6 +93,12 @@ PARTIAL BEISPIELE:
 "Wie viele Kinder gehen ungefähr zur Schule?" = PARTIAL
 "Ich denke, Babys brauchen mehrere Windeln pro Tag." = PARTIAL
 "Ich gehe davon aus, dass nicht jeder Erwachsene Kaffee trinkt." = PARTIAL
+"Wie viele Menschen leben ungefähr in China?" = PARTIAL
+"Wie viele Menschen wohnen ungefähr in Deutschland?" = PARTIAL
+"Wie viele Menschen leben ungefähr in Berlin?" = PARTIAL
+"Wie viele Kinder gibt es ungefähr in Deutschland?" = PARTIAL
+"Wie viele Babys gibt es ungefähr in China?" = PARTIAL
+"Wie viele Erwachsene leben ungefähr in Berlin?" = PARTIAL
 
 FINAL BEISPIELE:
 "Ich denke es gibt 40.000 Schulen." = FINAL
